@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
-import { List } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 import VideoItem from '../VideoItem'
 
 class VideoList extends Component {
   render() {
     return (
-      <List>
-        { this.renderVideo() }
-      </List>
+      <Grid.Column width={4}>
+        <div>
+          { this.renderVideo() }
+        </div>
+      </Grid.Column>
     )
   }
 
@@ -18,6 +20,8 @@ class VideoList extends Component {
         key = {video.etag}
         imgUrl = {video.snippet.thumbnails.default.url}
         description = {video.snippet.description}
+        video = {video}
+        setVideo = {this.props.setVideo}
       />
     ))
   }

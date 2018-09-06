@@ -1,3 +1,16 @@
 .video-item__data {
   display: inline-block;
 }
+
+.video-item__description {
+  padding-left: 0 !important;
+  overflow: hidden;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.c-video-item--hover:hover {
+  background-color: #bdbdbd;
+  cursor: pointer;
+}

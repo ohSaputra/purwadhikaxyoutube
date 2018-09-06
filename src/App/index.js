@@ -1,37 +1,50 @@
 import React, { Component } from 'react'
+import { Container, Grid } from 'semantic-ui-react'
 import YTSearch from 'youtube-api-search'
 
 import SearchBar from './Components/Presentation/SearchBar'
 import VideoList from './Components/Presentation/VideoList'
+import VideoPlayer from './Components/Presentation/VideoPlayer'
 
 const API_KEY = `AIzaSyA7w7zxKythBGqlmhf5Ie1st8J5800fd68`
 
 class App extends Component {
 
   state = {
-    data: null
+    data: null,
+    video: null
   }
 
   componentDidMount() {
-    YTSearch({ 
-      key: API_KEY, 
-      term: 'paramore' 
-    }, result => {
-      // console.log(result)
-      this.setState({data: result})
-    })
+    this.doSearch('asian games 2018')
   }
 
   render() {
-    const {data} = this.state
+    const {data, video} = this.state
 
     return (
-      <div>
-        <SearchBar />
-        { data && <VideoList data={data} /> }
-      </div>
+      <Container>
+        <Grid>
+          <SearchBar doSearch={this.doSearch} />
+          { video && <VideoPlayer video={video} />}
+          { data && <VideoList data={data} setVideo={this.setVideoPlayer} /> }
+        </Grid>
+      </Container>
     )
   }
+
+  doSearch = (keywords) =>
+    YTSearch({ 
+      key: API_KEY, 
+      term: keywords 
+    }, result => {
+      this.setState({
+        data: result,
+        video: result[0]
+      })
+    })
+
+  setVideoPlayer = video => this.setState({ video })
 }
 
 export default App
