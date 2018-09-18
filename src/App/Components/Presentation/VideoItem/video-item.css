@@ -7,7 +7,8 @@
   overflow: hidden;
   word-wrap: break-word;
   text-overflow: ellipsis;
-  font-size: 12px;
+  font-size: 10px;
+  max-height: 90px;
 }
 
 .c-video-item--hover:hover {
